@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-This module provides a Server class to paginate a database of popular baby names.
+This module provides a Server class to
+paginate a database of popular baby names.
 """
 import csv
 from typing import List
@@ -55,8 +56,11 @@ class Server:
         Returns:
             List[List]: The list of rows for the specified page.
         """
-        assert isinstance(page, int) and page > 0, "Page must be a positive integer."
-        assert isinstance(page_size, int) and page_size > 0, "Page size must be a positive integer."
+        assert isinstance(
+            page, int) and page > 0, "Page must be a positive integer."
+        assert isinstance(
+            page_size, int) and page_size > 0,
+        "Page size must be a positive integer."
 
         start_index, end_index = index_range(page, page_size)
         data = self.dataset()
