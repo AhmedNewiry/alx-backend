@@ -3,6 +3,7 @@
 This module provides a helper function
 """
 
+
 def index_range(page: int, page_size: int) -> tuple:
     """
     Returns a tuple of size two containing a start index and an end index
