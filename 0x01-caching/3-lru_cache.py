@@ -23,21 +23,23 @@ class LRUCache(BaseCaching):
         Args:
             key: The key under which to store the item.
             item: The item to store in the cache.
-        
+
         If either key or item is None, this method does nothing.
         If the cache exceeds its MAX_ITEMS,
         it discards the least recently used item.
         """
         if key is not None and item is not None:
             if key in self.cache_data:
-                # Remove the key from the access order list to update its position
+                # Remove the key from the access order list to update its
+                # position
                 self.access_order.remove(key)
             elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                # Evict the least recently used item (the first item in the list)
+                # Evict the least recently used item (the first item in the
+                # list)
                 lru_key = self.access_order.pop(0)
                 del self.cache_data[lru_key]
                 print(f"DISCARD: {lru_key}")
-            
+
             # Add or update the key in the cache and the access order list
             self.cache_data[key] = item
             self.access_order.append(key)
@@ -48,7 +50,7 @@ class LRUCache(BaseCaching):
 
         Args:
             key: The key of the item to retrieve.
-        
+
         Returns:
             The value associated with the key, or None if the key is None
             or does not exist in the cache.
