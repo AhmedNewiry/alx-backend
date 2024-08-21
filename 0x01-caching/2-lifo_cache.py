@@ -1,19 +1,19 @@
 #!/usr/bin/python3
 """ LIFOCache module """
-from base_caching import BaseCaching
 
+from base_caching import BaseCaching
 
 class LIFOCache(BaseCaching):
     """
     LIFOCache class that inherits from BaseCaching.
-    Implements a caching system with a
-    LIFO (Last-In-First-Out) eviction policy.
+    Implements a caching system with a LIFO
+    (Last-In-First-Out) eviction policy.
     """
 
     def __init__(self):
         """Initialize the cache"""
         super().__init__()
-        self.last_key = None  
+        self.stack = []
 
     def put(self, key, item):
         """
@@ -23,23 +23,24 @@ class LIFOCache(BaseCaching):
             key: The key under which to store the item.
             item: The item to store in the cache.
         
-        If either key or item is None, this method does nothing.
+        If either key or item is None,
+        this method does nothing.
         If the cache exceeds its MAX_ITEMS,
         it discards the last item added to the cache.
         """
         if key is not None and item is not None:
             if key in self.cache_data:
-                self.cache_data[key] = item
-            else:
-                self.cache_data[key] = item
-                self.last_key = key
-            
+                # Remove the key from the stack if it
+                #already exists (to update its position)
+                self.stack.remove(key)
+            self.cache_data[key] = item
+            self.stack.append(key)
+
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                if self.last_key:
-                    del self.cache_data[self.last_key]
-                    print(f"DISCARD: {self.last_key}")
-                # Update the last_key to the previous item in cache
-                self.last_key = list(self.cache_data.keys())[-1]
+                # Evict the last item in the stack (LIFO)
+                last_key = self.stack.pop(-2)
+                del self.cache_data[last_key]
+                print(f"DISCARD: {last_key}")
 
     def get(self, key):
         """
