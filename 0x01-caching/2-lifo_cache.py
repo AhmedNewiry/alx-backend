@@ -3,6 +3,7 @@
 
 from base_caching import BaseCaching
 
+
 class LIFOCache(BaseCaching):
     """
     LIFOCache class that inherits from BaseCaching.
@@ -22,7 +23,7 @@ class LIFOCache(BaseCaching):
         Args:
             key: The key under which to store the item.
             item: The item to store in the cache.
-        
+
         If either key or item is None,
         this method does nothing.
         If the cache exceeds its MAX_ITEMS,
@@ -31,7 +32,7 @@ class LIFOCache(BaseCaching):
         if key is not None and item is not None:
             if key in self.cache_data:
                 # Remove the key from the stack if it
-                #already exists (to update its position)
+                # already exists (to update its position)
                 self.stack.remove(key)
             self.cache_data[key] = item
             self.stack.append(key)
@@ -48,7 +49,7 @@ class LIFOCache(BaseCaching):
 
         Args:
             key: The key of the item to retrieve.
-        
+
         Returns:
             The value associated with the key,
             or None if the key is None
