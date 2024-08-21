@@ -7,13 +7,14 @@ from base_caching import BaseCaching
 class FIFOCache(BaseCaching):
     """
     FIFOCache class that inherits from BaseCaching.
-    Implements a caching system with a FIFO (First-In-First-Out) eviction policy.
+    Implements a caching system with
+    a FIFO (First-In-First-Out) eviction policy.
     """
 
     def __init__(self):
         """Initialize the cache"""
         super().__init__()
-        self.order = []  
+        self.order = []
 
     def put(self, key, item):
         """
@@ -24,7 +25,8 @@ class FIFOCache(BaseCaching):
             item: The item to store in the cache.
 
         If either key or item is None, this method does nothing.
-        If the cache exceeds its MAX_ITEMS, it discards the oldest item in the cache.
+        If the cache exceeds its MAX_ITEMS,
+        it discards the oldest item in the cache.
         """
         if key is not None and item is not None:
             if key in self.cache_data:
@@ -45,7 +47,8 @@ class FIFOCache(BaseCaching):
             key: The key of the item to retrieve.
 
         Returns:
-            The value associated with the key, or None if the key is None
+            The value associated with the key,
+            or None if the key is None
             or does not exist in the cache.
         """
         return self.cache_data.get(key, None)
