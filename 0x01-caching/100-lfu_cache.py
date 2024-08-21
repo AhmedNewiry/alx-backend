@@ -3,6 +3,7 @@
 
 from base_caching import BaseCaching
 
+
 class LFUCache(BaseCaching):
     """
     LFUCache class that inherits from BaseCaching.
@@ -22,20 +23,23 @@ class LFUCache(BaseCaching):
         Args:
             key: The key under which to store the item.
             item: The item to store in the cache.
-        
+
         If either key or item is None, this method does nothing.
         If the cache exceeds its MAX_ITEMS, it discards the least frequently used item.
         In case of a tie in frequency, it uses the LRU (Least Recently Used) policy.
         """
         if key is not None and item is not None:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+            if len(
+                    self.cache_data) >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
                 # Find the least frequently used keys
                 min_freq = min(self.frequency.values())
-                least_freq_keys = [k for k, v in self.frequency.items() if v == min_freq]
-                
+                least_freq_keys = [
+                    k for k, v in self.frequency.items() if v == min_freq]
+
                 # Resolve ties by least recently used policy
                 if len(least_freq_keys) > 1:
-                    oldest_key = min(least_freq_keys, key=lambda k: self.usage_order[k])
+                    oldest_key = min(
+                        least_freq_keys, key=lambda k: self.usage_order[k])
                 else:
                     oldest_key = least_freq_keys[0]
 
@@ -63,7 +67,7 @@ class LFUCache(BaseCaching):
 
         Args:
             key: The key of the item to retrieve.
-        
+
         Returns:
             The value associated with the key, or None if the key is None
             or does not exist in the cache.
