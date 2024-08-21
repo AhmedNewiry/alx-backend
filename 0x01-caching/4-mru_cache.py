@@ -6,13 +6,15 @@ from base_caching import BaseCaching
 class MRUCache(BaseCaching):
     """
     MRUCache class that inherits from BaseCaching.
-    Implements a caching system with an MRU (Most Recently Used) eviction policy.
+    Implements a caching system with an MRU
+    (Most Recently Used) eviction policy.
     """
 
     def __init__(self):
         """Initialize the cache"""
         super().__init__()
-        self.most_recent_key = None  # To keep track of the most recently used key
+        # To keep track of the most recently used key
+        self.most_recent_key = None
 
     def put(self, key, item):
         """
@@ -21,9 +23,10 @@ class MRUCache(BaseCaching):
         Args:
             key: The key under which to store the item.
             item: The item to store in the cache.
-        
+
         If either key or item is None, this method does nothing.
-        If the cache exceeds its MAX_ITEMS, it discards the most recently used item.
+        If the cache exceeds its MAX_ITEMS,
+        it discards the most recently used item.
         """
         if key is not None and item is not None:
             if key in self.cache_data:
@@ -48,7 +51,7 @@ class MRUCache(BaseCaching):
 
         Args:
             key: The key of the item to retrieve.
-        
+
         Returns:
             The value associated with the key, or None if the key is None
             or does not exist in the cache.
