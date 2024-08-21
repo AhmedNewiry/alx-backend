@@ -16,7 +16,7 @@ class BasicCache(BaseCaching):
         Args:
             key: The key under which to store the item.
             item: The item to store in the cache.
-        
+
         If either key or item is None, this method does nothing.
         """
         if key is not None and item is not None:
@@ -28,7 +28,7 @@ class BasicCache(BaseCaching):
 
         Args:
             key: The key of the item to retrieve.
-        
+
         Returns:
             The value associated with the key, or None if the key is None
             or does not exist in the cache.
