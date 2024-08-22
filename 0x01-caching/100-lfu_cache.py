@@ -7,14 +7,15 @@ from base_caching import BaseCaching
 class LFUCache(BaseCaching):
     """
     LFUCache class that inherits from BaseCaching.
-    Implements a caching system with an LFU (Least Frequently Used) eviction policy.
+    Implements a caching system with an LFU (Least Frequently Used)
+    eviction policy.
     """
 
     def __init__(self):
         """Initialize the cache"""
         super().__init__()
         self.frequency = {}  # To keep track of the frequency of each key
-        self.usage_order = {}  # To keep track of the order of usage for tie-breaking
+        self.usage_order = {}  # To keep track of the order of usage
 
     def put(self, key, item):
         """
@@ -25,12 +26,13 @@ class LFUCache(BaseCaching):
             item: The item to store in the cache.
 
         If either key or item is None, this method does nothing.
-        If the cache exceeds its MAX_ITEMS, it discards the least frequently used item.
-        In case of a tie in frequency, it uses the LRU (Least Recently Used) policy.
+        If the cache exceeds its MAX_ITEMS, it discards the least frequently
+        used item. In case of a tie in frequency, it uses the LRU (Least
+        Recently Used) policy.
         """
         if key is not None and item is not None:
-            if len(
-                    self.cache_data) >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+            if (len(self.cache_data) >= BaseCaching.MAX_ITEMS and
+                    key not in self.cache_data):
                 # Find the least frequently used keys
                 min_freq = min(self.frequency.values())
                 least_freq_keys = [
