@@ -29,7 +29,8 @@ app.config.from_object(Config)
 
 
 def get_user():
-    """Return a user dictionary or None if the ID cannot be found or if login_as was not passed."""
+    """Return a user dictionary or None if the ID
+    cannot be found or if login_as was not passed."""
     user_id = request.args.get('login_as')
     if user_id:
         return users.get(int(user_id))
