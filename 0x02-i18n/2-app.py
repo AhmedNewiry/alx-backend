@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-This module sets up a Flask application with Babel for internationalization (i18n).
+This module sets up a Flask application with
+Babel for internationalization (i18n).
 """
 
 from flask import Flask, render_template, request
@@ -27,7 +28,8 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale():
     """
-    Determine the best match for supported languages based on the client's request.
+    Determine the best match for supported
+    languages based on the client's request.
     Returns:
         str: The best matching language code.
     """
