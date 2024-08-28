@@ -9,10 +9,13 @@
     <h1>{{ _('Welcome to Holberton') }}</h1>
     <p>
         {% if g.user %}
-            {{ _('logged_in_as', username=g.user['name']) }}
+            {{ _('You are logged in as %(username)s.', username=g.user['name']) }}
         {% else %}
-            {{ _('not_logged_in') }}
+            {{ _('You are not logged in.') }}
         {% endif %}
+    </p>
+    <p>
+        {{ _('Current timezone: %(timezone)s', timezone=pytz.timezone(request.cookies.get('timezone', 'UTC')).zone) }}
     </p>
 </body>
 </html>
