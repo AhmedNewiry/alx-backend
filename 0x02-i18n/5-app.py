@@ -17,12 +17,15 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 class Config:
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
+
 app.config.from_object(Config)
+
 
 @babel.localeselector
 def get_locale():
@@ -36,6 +39,7 @@ def get_locale():
         return user_locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 def get_user():
     """Retrieve a user from the mock user table or return None."""
     user_id = request.args.get('login_as')
@@ -44,16 +48,18 @@ def get_user():
         return users.get(user_id)
     return None
 
+
 @app.before_request
 def before_request():
     """Set the current user if a login_as parameter is present."""
     g.user = get_user()
+
 
 @app.route('/')
 def index():
     """Render the index page."""
     return render_template('5-index.html')
 
+
 if __name__ == '__main__':
     app.run(debug=True)
-
